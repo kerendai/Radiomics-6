@@ -10,15 +10,15 @@ This is part of the Radiomics6 research initiative focusing on AI-assisted imagi
 
 ---
 
-## 🧩 Repository Structure
+## 🔖 Repository Contents
 
-📄 lung_cancer_segmentation.py # Segmentation + Radiomics + MongoDB storage
-📄 train_models.py # Trains models using extracted features
-📄 PET_CT_Metadata_with_Metastasis_Labels.csv
-📄 radiomics_features.csv
-📄 model_results_summary.csv
-📄 model_predictions.xlsx
-📄 README.md
+1. `lung_cancer_segmentation.py` – segmentation and feature extraction  
+2. `train_models.py` – training and evaluation of models  
+3. `radiomics_features.csv` – extracted features  
+4. `model_predictions.xlsx` – predictions  
+5. `model_results_summary.csv` – performance metrics  
+6. `PET_CT_Metadata_with_Metastasis_Labels.csv` – patient-level labels  
+7. `requirements.txt` – installation dependencies
 
 ## 📂 What the Code Does
 
