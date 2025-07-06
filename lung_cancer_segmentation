@@ -1,3 +1,7 @@
+"""
+Script to segment mid-slices of PET/CT images using MedSAM, extract radiomic features,
+and store results in MongoDB and local CSV/PNG formats.
+"""
 import os
 import cv2
 import pydicom
@@ -11,12 +15,16 @@ from pymongo import MongoClient
 from pymongo.server_api import ServerApi
 from segment_anything import sam_model_registry, SamPredictor
 from radiomics import featureextractor
+from dotenv import load_dotenv
+import os
+from pymongo import MongoClient
+from pymongo.server_api import ServerApi
 
 # === SETUP ===
-metadata_path = '/home/ilants/radiomics6_project/up_scale/data_lung cancer/manifest-1608669183333/PET_CT_Metadata_with_Metastasis_Labels.csv'  
-root_dir = "/home/ilants/radiomics6_project/up_scale/data_lung cancer/Lung-PET-CT-Dx"
-checkpoint_path = "/home/ilants/radiomics6_project/small scale/Medsam/medsam_vit_b.pth"
-mask_output_dir = "/home/ilants/radiomics6_project/up_scale/segmentation_masks"
+metadata_path = './PET_CT_Metadata_with_Metastasis_Labels.csv'  
+root_dir = "./Lung-PET-CT-Dx"
+checkpoint_path = "./Medsam/medsam_vit_b.pth"
+mask_output_dir = "./segmentation_masks"
 os.makedirs(mask_output_dir, exist_ok=True)
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -31,7 +39,14 @@ df['Fixed Path'] = df['Fixed Path'].str.replace('Lung-PET-CT-Dx/', '', regex=Fal
 df['Full Path'] = df['Fixed Path'].apply(lambda x: os.path.join(root_dir, x))
 
 # Connect to MongoDB Atlas
-uri = "mongodb+srv://xxx/?appName=Cluster0"
+MONGODB_URI=mongodb+srv://your-username:your-password@your-cluster.mongodb.net/?retryWrites=true&w=majority
+# Load environment variables from .env
+load_dotenv()
+
+# Retrieve the MongoDB URI from environment variable
+uri = os.getenv("MONGODB_URI")
+
+# Connect to MongoDB
 client = MongoClient(uri, server_api=ServerApi('1'))
 db = client["radiomics6"]
 patients_col = db["patients"]
