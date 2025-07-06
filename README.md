@@ -54,8 +54,9 @@ You can access the dataset here:
 ## 🛠 Requirements
 Install dependencies with:
 
-```bash
-pip install -r requirements.txt'''
+pip install -r requirements.txt
+
+---
 
 ## 📁 Output Files
 Segmentation results: segmentation_masks/
@@ -68,7 +69,7 @@ model_predictions.xlsx
 
 model_results_summary.csv
 
-
+---
 
 ## 🔮 Future Work
 Here are some optional next steps for anyone continuing this project:
@@ -90,6 +91,8 @@ Use multiple data types to enhance model robustness:
 Combine PET, CT, metadata, and (optionally) genomic data
 Apply advanced deep learning architectures that handle multiple modalities (e.g., transformers, late-fusion models)
 
+---
+
 ## 📬 Contact
 For questions or collaborations, please reach out via the repository’s issues page.
 
@@ -101,7 +104,7 @@ This project uses imaging data from the LUNG-PET-CT-DX dataset provided by The C
 
 Please cite the dataset appropriately:
 
-$$$ Clark K, Vendt B, Smith K, et al. (2013)
+### Clark K, Vendt B, Smith K, et al. (2013)
 The Cancer Imaging Archive (TCIA): Maintaining and Operating a Public Information Repository
 Journal of Digital Imaging. 26(6):1045-1057.
 DOI: 10.1007/s10278-013-9622-7
