@@ -1,49 +1,92 @@
 Welcome to Radiomics6!
 
-In this repository, you will find the necessary data structure, scripts, and code needed to use PyRadiomics and execute our CT and PET/CT analysis pipeline on the Lung-PET-CT-DX dataset from TCIA. This project focuses on whole-body PET/CT analysis, segmentation, and radiomic feature extraction, followed by exploratory and predictive modeling.
+This repository provides a full pipeline for segmenting mid-slices from CT & PET/CT scans using MedSAM, extracting radiomic features using PyRadiomics, and training classification models to predict metastasis status. It is part of the Radiomics6 research project focused on enhancing medical imaging analysis through AI and radiomics.
 
-How to run the pipeline:
-Open the project in Python (or Jupyter Notebook). You can run the segmentation and feature extraction modules directly or integrate them into your own workflow.
+🧩 Repository Structure
 
-📦 Required libraries:
-- numpy
-- pandas
-- scikit-learn
-- pyradiomics
-- SimpleITK
-- pymongo
-- matplotlib
+📁 lung_cancer_segmentation.py        # Performs segmentation, radiomics extraction, MongoDB storage
+📁 train_models.py                    # Trains classifiers on extracted features
+📄 PET_CT_Metadata_with_Metastasis_Labels.csv
+📄 radiomics_features.csv
+📄 model_results_summary.csv
+📄 model_predictions.xlsx
+📄 README.md
 
-Import commands are already included in the scripts and notebooks.
+📂 What the Code Does
 
----
+*lung_cancer_segmentation.py*
 
-### Stages for Execution:
+* Loads metadata and DICOM PET/CT scans
 
-#### PET/CT Images – Data Acquisition → Segmentation:
+* Segments the mid-slice using MedSAM
 
-The original dataset is downloaded from [TCIA – Lung-PET-CT-DX](https://www.cancerimagingarchive.net/) in DICOM format. Each subject includes CT and PET volumes and annotations.
+* Extracts radiomic features using PyRadiomics
 
-To segment organs or tumor areas, we use:
+* Saves the segmented masks and features to disk
 
-- **TotalSegmentator**: for automatic whole-body segmentation.
-- **MedSAM**: for fine-tuned segmentation on medical data.
+* Stores metadata and summary in MongoDB
 
-Segmentation outputs are saved as mask files aligned with the original CT/PET images.
+*train_models.py*
 
----
+* Loads the radiomics CSV and labels
 
-#### PyRadiomics – Feature Extraction:
+* Applies PCA for dimensionality reduction
 
-To extract features:
+* Trains Logistic Regression, SVM, and Random Forest
 
-1. Convert the images and masks (if needed) to NIfTI format.
-2. Prepare a CSV file listing:
-   - Image path
-   - Mask path
-   - Patient ID or label
+* Saves prediction results and model performance metrics to disk
 
-Run PyRadiomics using:
+⚠️ IMPORTANT — Update File Paths
+The file paths provided in the code are example paths that you should replace based on where your data and models are stored locally.
+Make sure all referenced folders and files exist on your system.
+If you're using a different folder structure, update the paths accordingly in both lung_cancer_segmentation.py and train_models.py.
 
-```bash
-pyradiomics path/to/images_and_masks.csv -o output_features.csv -f csv
+🗃️ Dataset Source
+The data used in this project is from the LUNG-PET-CT-Dx dataset, publicly available on The Cancer Imaging Archive (TCIA).
+
+You can access the dataset here:
+🔗 https://www.cancerimagingarchive.net/collections/lung-pet-ct-dx
+
+! This dataset is in the public domain but may require account registration and download through the NBIA Data Retriever.
+
+🛠 Requirements
+To install the required packages, run:
+
+pip install -r requirements.txt
+
+✅ Output Files
+
+Once the scripts are executed:
+
+Segmentation results are saved in segmentation_masks/
+
+Radiomics features are stored in radiomics_features.csv
+
+Model performance is saved in:
+
+model_predictions.xlsx
+
+model_results_summary.csv
+
+🔮 Future Work
+Here are some optional next steps for anyone continuing this project:
+
+1. Organ Segmentation for Full-Body Analysis
+Extend segmentation beyond tumors to include whole-body organs such as:
+Liver
+Kidneys
+Spine
+This enables more holistic analysis and cross-organ correlations using tools like TotalSegmentator or MedSAM.
+
+2. Integrate Genomic Data
+Combine imaging features with genomic mutations to support multi-omics models:
+Common mutations: p53, BRCA1/2, MET
+Enables correlation of phenotypic imaging traits with genetic profiles
+
+3. Explore Multi-Modal Learning
+Use multiple data types to enhance model robustness:
+Combine PET, CT, metadata, and (optionally) genomic data
+Apply advanced deep learning architectures that handle multiple modalities (e.g., transformers, late-fusion models)
+
+📬 Contact
+For questions or collaborations, please reach out via the repository’s issues page.
