@@ -55,12 +55,9 @@ You can access the dataset here:
 Install dependencies with:
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt'''
 
----
-
-## ✅ Output Files
-
+## 📁 Output Files
 Segmentation results: segmentation_masks/
 
 Radiomics features: radiomics_features.csv
@@ -70,6 +67,8 @@ Model results:
 model_predictions.xlsx
 
 model_results_summary.csv
+
+
 
 ## 🔮 Future Work
 Here are some optional next steps for anyone continuing this project:
