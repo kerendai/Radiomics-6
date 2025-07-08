@@ -91,6 +91,12 @@ Use multiple data types to enhance model robustness:
 Combine PET, CT, metadata, and (optionally) genomic data
 Apply advanced deep learning architectures that handle multiple modalities (e.g., transformers, late-fusion models)
 
+### 4. Working with Foundation Models
+Experiment with foundation models (e.g., MedSAM, Segment Anything) for zero-shot or few-shot segmentation. These models offer generalization capabilities and reduce the need for large annotated datasets.
+
+### 5. Docker-Container for Reproducibility
+Package the entire pipeline—including preprocessing, segmentation, feature extraction, and modeling—into a Docker container to ensure portability and reproducibility across systems.
+
 ---
 
 ## 📬 Contact
