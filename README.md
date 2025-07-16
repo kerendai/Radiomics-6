@@ -67,11 +67,14 @@ Save as:
 For CT-only:
 
 python lung_cancer_segmentation_ct.py
+
 For PET+CT subset:
+
 python lung_cancer_segmentation_pet_ct.py
 
 ### 🗂 Output Structure
 For CT-only script (segmentation_masks/):
+
 segmentation_masks/
 ├── <patientID>_sliceXXX_image.png
 ├── <patientID>_sliceXXX_mask.png
@@ -79,6 +82,7 @@ segmentation_masks/
 ├── <patientID>_sliceXXX_mask_vis.png
 
 For PET/CT script (seg_files_ct_pet/):
+
 seg_files_ct_pet/
 ├── <patientID>_CT_image.mha
 ├── <patientID>_CT_mask.png
