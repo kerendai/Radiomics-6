@@ -1,22 +1,43 @@
-## 🗃️ Dataset Source
-The data used in this project is from the LUNG-PET-CT-Dx dataset, publicly available on The Cancer Imaging Archive (TCIA).
+## 🧾 Dataset Information: LUNG-PET-CT-DX
 
-You can access the dataset here:
-🔗 https://www.cancerimagingarchive.net/collections/lung-pet-ct-dx
+This project uses the **LUNG-PET-CT-DX** dataset from [The Cancer Imaging Archive (TCIA)](https://www.cancerimagingarchive.net/collections/lung-pet-ct-dx).
 
-### 📌 This dataset is in the public domain but may require account registration and download through the NBIA Data Retriever.
+---
 
-### Dataset Usage Notice
-This project uses imaging data from the LUNG-PET-CT-DX dataset provided by The Cancer Imaging Archive (TCIA).
+## 📦 Dataset Description
 
-Please cite the dataset appropriately:
+- Whole-body CT and PET-CT DICOM scans of lung cancer patients
+- Annotated tumor locations (bounding boxes in XML format)
+- Includes demographics and diagnosis in accompanying CSV file
 
-### Clark K, Vendt B, Smith K, et al. (2013)
-The Cancer Imaging Archive (TCIA): Maintaining and Operating a Public Information Repository
-Journal of Digital Imaging. 26(6):1045-1057.
-DOI: 10.1007/s10278-013-9622-7
+---
+
+## 🔽 How to Download the Dataset
+
+1. Go to the dataset page:  
+   🔗 https://www.cancerimagingarchive.net/collections/lung-pet-ct-dx
+
+2. Click "Download" and export a **manifest file** (`.tcia`)
+
+3. Open the manifest file with the **NBIA Data Retriever** 
+
+4. Choose your local download folder and download the DICOM data.
+
+---
+
+## ⚠️ Important Notes
+
+- **Do NOT upload DICOM or CSV data files to GitHub**
+- Follow all TCIA data usage and privacy regulations
+
+---
+
+## 📚 Citation
+
+> Clark K, Vendt B, Smith K, et al. (2013)  
+> *The Cancer Imaging Archive (TCIA): Maintaining and Operating a Public Information Repository*  
+> Journal of Digital Imaging. 26(6):1045–1057.  
+> DOI: [10.1007/s10278-013-9622-7](https://doi.org/10.1007/s10278-013-9622-7)
 
 Use of this dataset is governed by the TCIA Data Usage Policy.
-Be sure to comply with all licensing, citation, and ethical requirements outlined by TCIA.
-
 
