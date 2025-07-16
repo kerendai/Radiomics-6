@@ -1,121 +1,92 @@
-# Welcome to Radiomics6!
+# 🧪 Modeling & Evaluation – CT and PET/CT
 
-This repository offers a complete pipeline for:
-
-- Segmenting mid-slices from CT & PET/CT scans using **MedSAM**
-- Extracting radiomic features using **PyRadiomics**
-- Training classification models to predict **metastasis status**
-
-This is part of the Radiomics6 research initiative focusing on AI-assisted imaging analysis.
+This folder contains scripts and outputs for radiomics-based metastasis prediction using machine learning models trained on CT and PET features.
 
 ---
 
-## 🔖 Repository Contents
+## 🎯 Goals
 
-1. `lung_cancer_segmentation.py` – segmentation and feature extraction  
-2. `train_models.py` – training and evaluation of models  
-3. `radiomics_features.csv` – extracted features  
-4. `model_predictions.xlsx` – predictions  
-5. `model_results_summary.csv` – performance metrics  
-6. `PET_CT_Metadata_with_Metastasis_Labels.csv` – patient-level labels  
-7. `requirements.txt` – installation dependencies
-
-## 📂 What the Code Does
-
-### *lung_cancer_segmentation.py*
-- Loads metadata and PET/CT DICOM scans
-- Segments mid-slice with MedSAM
-- Extracts radiomic features with PyRadiomics
-- Saves masks and features to disk
-- Inserts metadata and features into MongoDB
-
-### *train_models.py*
-- Loads radiomics features and labels
-- Applies PCA for dimensionality reduction
-- Trains Logistic Regression, SVM, and Random Forest
-- Outputs model results and predictions
+- Analyze correlations between CT and PET radiomics features
+- Reduce dimensionality with PCA
+- Select informative features using p-values
+- Train multiple classification models (Logistic Regression, SVM, Random Forest, etc.)
+- Evaluate model performance using Accuracy, F1, and Log Loss
 
 ---
 
-## ⚠️ IMPORTANT Notes
-> **⚠️ Update File Paths**  
-> Be sure to modify file paths according to your local data structure in both Python scripts.
+## 📁 Folder Contents
 
-## 🗃️ Dataset Source
-The data used in this project is from the LUNG-PET-CT-Dx dataset, publicly available on The Cancer Imaging Archive (TCIA).
-
-You can access the dataset here:
-🔗 https://www.cancerimagingarchive.net/collections/lung-pet-ct-dx
-
-### 📌 This dataset is in the public domain but may require account registration and download through the NBIA Data Retriever.
+| File | Description |
+|------|-------------|
+| `correlation_pet_ct.py` | Correlation and PCA analysis between PET and CT features |
+| `ct_train_models.py` | Trains models using CT-only radiomics features |
+| `train_models_pet_ct.py` | Trains models using both PET and CT features with SMOTE |
+| `PET_CT_Metadata_with_Metastasis_Labels.csv` | Patient labels (metastasis status) |
+| `pet_ct_patient_correlations.csv` | Output of PET-CT feature correlation analysis |
+| `p_values_PET_CT.xlsx` | Top significant features based on p-value |
+| `model_predictions_ct.xlsx` | Per-patient predictions for each CT-only model |
+| `model_results_summary_ct.csv` | Accuracy, F1-score, and Log Loss for CT-only models |
+| `prt_ct_model_evaluation_results.csv` | Combined results from PET and CT models |
 
 ---
 
-## 🛠 Requirements
-Install dependencies with:
+## 🤖 Models Used
+
+- Logistic Regression  
+- Support Vector Machine (SVM)  
+- Random Forest  
+- K-Nearest Neighbors  
+- Naive Bayes  
+- Gradient Boosting  
+- XGBoost (if installed)
+
+All models were trained using PCA-reduced features explaining 95% of the variance.
+
+---
+
+## ⚙️ How to Run
+
+### 1. Install dependencies:
 
 pip install -r requirements.txt
 
----
+### 2. Run correlation analysis:
 
-## 📁 Output Files
-Segmentation results: segmentation_masks/
+python correlation_pet_ct.py
 
-Radiomics features: radiomics_features.csv
+### 3. Train CT-only models:
 
-Model results:
+python ct_train_models.py
 
-model_predictions.xlsx
+### 4. Train PET+CT models and perform evaluation:
 
-model_results_summary.csv
+python train_models_pet_ct.py
 
----
+## 📊 Output Highlights
+model_predictions_ct.xlsx
+Per-patient model predictions and probabilities for CT-only models
 
-## 🔮 Future Work
-Here are some optional next steps for anyone continuing this project:
+model_results_summary_ct.csv
+Summary table with Accuracy, F1-score, and Log Loss for CT models
 
-### 1. Organ Segmentation for Full-Body Analysis
-Extend segmentation beyond tumors to include whole-body organs such as:
-Liver
-Kidneys
-Spine
-This enables more holistic analysis and cross-organ correlations using tools like TotalSegmentator or MedSAM.
+prt_ct_model_evaluation_results.csv
+Model performance metrics for both CT and PET (with SMOTE balancing)
 
-### 2. Integrate Genomic Data
-Combine imaging features with genomic mutations to support multi-omics models:
-Common mutations: p53, BRCA1/2, MET
-Enables correlation of phenotypic imaging traits with genetic profiles
+p_values_PET_CT.xlsx
+Top features significantly associated with metastasis (p-value < 0.05)
 
-### 3. Explore Multi-Modal Learning
-Use multiple data types to enhance model robustness:
-Combine PET, CT, metadata, and (optionally) genomic data
-Apply advanced deep learning architectures that handle multiple modalities (e.g., transformers, late-fusion models)
+pet_ct_patient_correlations.csv
+Pearson correlations between PET and CT feature sets
 
-### 4. Working with Foundation Models
-Experiment with foundation models (e.g., MedSAM, Segment Anything) for zero-shot or few-shot segmentation. These models offer generalization capabilities and reduce the need for large annotated datasets.
+## 📌 Notes
+PCA is applied separately for CT and PET to reduce feature dimensions
 
-### 5. Docker-Container for Reproducibility
-Package the entire pipeline—including preprocessing, segmentation, feature extraction, and modeling—into a Docker container to ensure portability and reproducibility across systems.
+SMOTE is used in the PET/CT pipeline to balance class distribution
 
----
+PET and CT pipelines are kept separate for comparison
 
-## 📬 Contact
-For questions or collaborations, please reach out via the repository’s issues page.
+XGBoost is optional – install it if needed
 
-## 📝 License
-This project is licensed under the MIT License — see the LICENSE file for details.
 
-### Dataset Usage Notice
-This project uses imaging data from the LUNG-PET-CT-DX dataset provided by The Cancer Imaging Archive (TCIA).
-
-Please cite the dataset appropriately:
-
-### Clark K, Vendt B, Smith K, et al. (2013)
-The Cancer Imaging Archive (TCIA): Maintaining and Operating a Public Information Repository
-Journal of Digital Imaging. 26(6):1045-1057.
-DOI: 10.1007/s10278-013-9622-7
-
-Use of this dataset is governed by the TCIA Data Usage Policy.
-Be sure to comply with all licensing, citation, and ethical requirements outlined by TCIA.
 
 
