@@ -59,9 +59,15 @@ Create a .env file in the project root with:
 MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/
 
 ### 3. Place model weights
-Download MedSAM weights from official repo
-Save as:
-./Medsam/medsam_vit_b.pth
+To use the MedSAM model for segmentation, download the pre-trained weights from the official GitHub repository:
+
+📦 Checkpoint file: medsam_vit_b.pth
+📁 Save location: ./Medsam/medsam_vit_b.pth
+
+You can download it from:
+🔗 https://github.com/bowang-lab/MedSAM#download-checkpoints
+
+The vit_b version is used in this project.
 
 ### 4. Run the script
 For CT-only:
@@ -108,6 +114,14 @@ MongoDB stores patient-level segmentation summaries
 Features include shape, texture, and intensity descriptors
 
 Some CT images may have inconsistent slice dimensions – these are skipped
+
+📚 Citation for MedSAM
+Wang, B., Li, Y., Liu, Y., He, Z., You, C., Zhang, Y., ... & Chen, H. (2023).
+MedSAM: Segment Anything in Medical Images
+arXiv preprint arXiv:2306.00652
+🔗 https://arxiv.org/abs/2306.00652
+
+
 
 
 
