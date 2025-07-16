@@ -115,11 +115,13 @@ Features include shape, texture, and intensity descriptors
 
 Some CT images may have inconsistent slice dimensions – these are skipped
 
-📚 Citation for MedSAM
-Wang, B., Li, Y., Liu, Y., He, Z., You, C., Zhang, Y., ... & Chen, H. (2023).
-MedSAM: Segment Anything in Medical Images
-arXiv preprint arXiv:2306.00652
+## 📚 Citation for MedSAM
+
+Wang, B., Li, Y., Liu, Y., He, Z., You, C., Zhang, Y., ... & Chen, H. (2023).  
+**MedSAM: Segment Anything in Medical Images**  
+*arXiv preprint arXiv:2306.00652*  
 🔗 https://arxiv.org/abs/2306.00652
+
 
 
 
