@@ -33,9 +33,9 @@ Predict metastasis status using radiomic features extracted from CT and PET scan
 
 | Branch | Description |
 |--------|-------------|
-| `data` | Dataset source and folder structure for LUNG-PET-CT-DX |
-| `segmentation_features` | Scripts for segmentation (MedSAM) and radiomic feature extraction (PyRadiomics) |
-| `modeling` | Correlation analysis, p-value computation, and training ML models |
+| [`1.-Data`](../../tree/1.-Data) | Dataset source and folder structure for LUNG-PET-CT-DX |
+| [`2.-Segmentation-and-feature-extraction`](../../tree/2.-Segmentation-and-feature-extraction) | Scripts for segmentation (MedSAM) and radiomic feature extraction (PyRadiomics) |
+| [`3.-Classification-models-and-evaluation`](../../tree/3.-Classification-models-and-evaluation) | Correlation analysis, p-value computation, and ML model training and evaluation |
 
 ---
 
@@ -53,9 +53,9 @@ Predict metastasis status using radiomic features extracted from CT and PET scan
 1. Install dependencies:
 pip install -r requirements.txt
 
-2. Run segmentation (see Segmentation_and_feature_extraction branch)
+2. Run segmentation (in 2.-Segmentation-and-feature-extraction branch)
 
-3. Train models (see Classification_models_and_evaluation branch)
+3. Train models (in 3.-Classification-models-and-evaluation branch)
 
 ##### Results are saved as .csv/.xlsx files per model
 
