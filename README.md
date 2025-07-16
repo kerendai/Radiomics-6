@@ -46,10 +46,11 @@ All models were trained using PCA-reduced features explaining 95% of the varianc
 
 ## ⚙️ How to Run
 
-```markdown
 ### 1. Install dependencies:
 ```bash
 pip install -r requirements.tx
+
+---
 
 ### 2. Run correlation analysis:
 
