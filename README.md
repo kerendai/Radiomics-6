@@ -55,9 +55,9 @@ pip install -r requirements.txt
 
 2. Run segmentation (see Segmentation_and_feature_extraction branch)
 
-Train models (see Classification_models_and_evaluation branch)
+3. Train models (see Classification_models_and_evaluation branch)
 
-Results are saved as .csv/.xlsx files per model
+##### Results are saved as .csv/.xlsx files per model
 
 ### 📚 Citations
 📁 Dataset
