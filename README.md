@@ -1,121 +1,111 @@
-# Welcome to Radiomics6!
+## 🧠 Segmentation & Radiomic Feature Extraction
 
-This repository offers a complete pipeline for:
-
-- Segmenting mid-slices from CT & PET/CT scans using **MedSAM**
-- Extracting radiomic features using **PyRadiomics**
-- Training classification models to predict **metastasis status**
-
-This is part of the Radiomics6 research initiative focusing on AI-assisted imaging analysis.
+This folder includes scripts and outputs related to segmenting mid-slices of PET/CT images and extracting radiomic features for radiomics-based metastasis classification.
 
 ---
 
-## 🔖 Repository Contents
+## 🧰 Tools Used
 
-1. `lung_cancer_segmentation.py` – segmentation and feature extraction  
-2. `train_models.py` – training and evaluation of models  
-3. `radiomics_features.csv` – extracted features  
-4. `model_predictions.xlsx` – predictions  
-5. `model_results_summary.csv` – performance metrics  
-6. `PET_CT_Metadata_with_Metastasis_Labels.csv` – patient-level labels  
-7. `requirements.txt` – installation dependencies
-
-## 📂 What the Code Does
-
-### *lung_cancer_segmentation.py*
-- Loads metadata and PET/CT DICOM scans
-- Segments mid-slice with MedSAM
-- Extracts radiomic features with PyRadiomics
-- Saves masks and features to disk
-- Inserts metadata and features into MongoDB
-
-### *train_models.py*
-- Loads radiomics features and labels
-- Applies PCA for dimensionality reduction
-- Trains Logistic Regression, SVM, and Random Forest
-- Outputs model results and predictions
+- **MedSAM** – Foundation model for medical image segmentation (ViT-based)
+- **PyRadiomics** – Feature extraction from image and mask
+- **MongoDB Atlas** – Storing segmentation summaries and patient-level data
 
 ---
 
-## ⚠️ IMPORTANT Notes
-> **⚠️ Update File Paths**  
-> Be sure to modify file paths according to your local data structure in both Python scripts.
+## 📁 Folder Contents
 
-## 🗃️ Dataset Source
-The data used in this project is from the LUNG-PET-CT-Dx dataset, publicly available on The Cancer Imaging Archive (TCIA).
-
-You can access the dataset here:
-🔗 https://www.cancerimagingarchive.net/collections/lung-pet-ct-dx
-
-### 📌 This dataset is in the public domain but may require account registration and download through the NBIA Data Retriever.
+| File | Description |
+|------|-------------|
+| `lung_cancer_segmentation_ct.py` | Segmentation + feature extraction for CT scans (all patients) |
+| `lung_cancer_segmentation_pet_ct.py` | Segmentation + feature extraction for both CT and PET (subset of 73 patients) |
+| `ct_radiomics_features.csv` | Features from CT scans of all patients |
+| `pet_ct_radiomics_features_CT.csv` | Features from CT scans of PET/CT patients |
+| `pet_ct_radiomics_features_PET.csv` | Features from PET scans of PET/CT patients |
 
 ---
 
-## 🛠 Requirements
-Install dependencies with:
+## 🧪 How It Works
+
+Both scripts follow this general pipeline:
+
+1. Load patient DICOM scans (PET/CT)
+2. Identify the mid-slice of each scan
+3. Run **MedSAM** to segment the image
+4. Use **PyRadiomics** to extract features from the segmented area
+5. Store features in:
+   - CSV files
+   - MongoDB (`patients` collection)
+
+---
+
+## 🧭 Which Script to Use?
+
+| Script | Use Case |
+|--------|----------|
+| `lung_cancer_segmentation_ct.py` | Use this if you're processing **all CT scans** in the LUNG-PET-CT-DX dataset |
+| `lung_cancer_segmentation_pet_ct.py` | Use this if you're processing only the **73 patients with both PET and CT** scans |
+
+---
+
+## ⚙️ How to Run
+
+### 1. Install dependencies:
 
 pip install -r requirements.txt
 
----
+### 2. Add your MongoDB URI
+Create a .env file in the project root with:
 
-## 📁 Output Files
-Segmentation results: segmentation_masks/
+MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/
 
-Radiomics features: radiomics_features.csv
+### 3. Place model weights
+Download MedSAM weights from official repo
+Save as:
+./Medsam/medsam_vit_b.pth
 
-Model results:
+### 4. Run the script
+For CT-only:
 
-model_predictions.xlsx
+python lung_cancer_segmentation_ct.py
+For PET+CT subset:
+python lung_cancer_segmentation_pet_ct.py
 
-model_results_summary.csv
+### 🗂 Output Structure
+For CT-only script (segmentation_masks/):
+segmentation_masks/
+├── <patientID>_sliceXXX_image.png
+├── <patientID>_sliceXXX_mask.png
+├── <patientID>_sliceXXX_image_vis.png
+├── <patientID>_sliceXXX_mask_vis.png
 
----
+For PET/CT script (seg_files_ct_pet/):
+seg_files_ct_pet/
+├── <patientID>_CT_image.mha
+├── <patientID>_CT_mask.png
+├── <patientID>_PET_image.mha
+├── <patientID>_PET_mask.png
 
-## 🔮 Future Work
-Here are some optional next steps for anyone continuing this project:
+# CSV outputs:
 
-### 1. Organ Segmentation for Full-Body Analysis
-Extend segmentation beyond tumors to include whole-body organs such as:
-Liver
-Kidneys
-Spine
-This enables more holistic analysis and cross-organ correlations using tools like TotalSegmentator or MedSAM.
+ct_radiomics_features.csv
 
-### 2. Integrate Genomic Data
-Combine imaging features with genomic mutations to support multi-omics models:
-Common mutations: p53, BRCA1/2, MET
-Enables correlation of phenotypic imaging traits with genetic profiles
+pet_ct_radiomics_features_CT.csv
 
-### 3. Explore Multi-Modal Learning
-Use multiple data types to enhance model robustness:
-Combine PET, CT, metadata, and (optionally) genomic data
-Apply advanced deep learning architectures that handle multiple modalities (e.g., transformers, late-fusion models)
+pet_ct_radiomics_features_PET.csv
 
-### 4. Working with Foundation Models
-Experiment with foundation models (e.g., MedSAM, Segment Anything) for zero-shot or few-shot segmentation. These models offer generalization capabilities and reduce the need for large annotated datasets.
 
-### 5. Docker-Container for Reproducibility
-Package the entire pipeline—including preprocessing, segmentation, feature extraction, and modeling—into a Docker container to ensure portability and reproducibility across systems.
+## 📌 Notes
+Mid-slice is selected for computational efficiency
 
----
+PET and CT may require different preprocessing steps (windowing, normalization)
 
-## 📬 Contact
-For questions or collaborations, please reach out via the repository’s issues page.
+MongoDB stores patient-level segmentation summaries
 
-## 📝 License
-This project is licensed under the MIT License — see the LICENSE file for details.
+Features include shape, texture, and intensity descriptors
 
-### Dataset Usage Notice
-This project uses imaging data from the LUNG-PET-CT-DX dataset provided by The Cancer Imaging Archive (TCIA).
+Some CT images may have inconsistent slice dimensions – these are skipped
 
-Please cite the dataset appropriately:
 
-### Clark K, Vendt B, Smith K, et al. (2013)
-The Cancer Imaging Archive (TCIA): Maintaining and Operating a Public Information Repository
-Journal of Digital Imaging. 26(6):1045-1057.
-DOI: 10.1007/s10278-013-9622-7
 
-Use of this dataset is governed by the TCIA Data Usage Policy.
-Be sure to comply with all licensing, citation, and ethical requirements outlined by TCIA.
 
 
