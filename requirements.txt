@@ -1,0 +1,11 @@
+pydicom
+numpy
+pandas
+opencv-python
+imageio
+SimpleITK
+pyradiomics
+pymongo
+python-dotenv
+torch
+segment-anything @ git+https://github.com/facebookresearch/segment-anything.git
