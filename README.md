@@ -1,121 +1,78 @@
-# Welcome to Radiomics6!
+# 🧬 Radiomics6 – Metastasis Prediction from CT and PET Imaging
 
-This repository offers a complete pipeline for:
+Welcome to **Radiomics6**, a multi-stage radiomics pipeline for segmenting PET/CT images, extracting radiomic features, and training ML models to predict metastasis in cancer patients.
 
-- Segmenting mid-slices from CT & PET/CT scans using **MedSAM**
-- Extracting radiomic features using **PyRadiomics**
-- Training classification models to predict **metastasis status**
-
-This is part of the Radiomics6 research initiative focusing on AI-assisted imaging analysis.
+This project is part of the **Radiomics 6** initiative, leveraging open-source tools and public imaging datasets.
 
 ---
 
-## 🔖 Repository Contents
+## 🧪 Project Overview
 
-1. `lung_cancer_segmentation.py` – segmentation and feature extraction  
-2. `train_models.py` – training and evaluation of models  
-3. `radiomics_features.csv` – extracted features  
-4. `model_predictions.xlsx` – predictions  
-5. `model_results_summary.csv` – performance metrics  
-6. `PET_CT_Metadata_with_Metastasis_Labels.csv` – patient-level labels  
-7. `requirements.txt` – installation dependencies
+### 🎯 Goal:
+Predict metastasis status using radiomic features extracted from CT and PET scans.
 
-## 📂 What the Code Does
+### 📊 Pipeline Steps:
 
-### *lung_cancer_segmentation.py*
-- Loads metadata and PET/CT DICOM scans
-- Segments mid-slice with MedSAM
-- Extracts radiomic features with PyRadiomics
-- Saves masks and features to disk
-- Inserts metadata and features into MongoDB
+1. **📥 Data Collection**  
+   - Dataset: [LUNG-PET-CT-DX (TCIA)](https://www.cancerimagingarchive.net/collections/lung-pet-ct-dx)  
+   - Includes whole-body CT and PET-CT scans + metadata
 
-### *train_models.py*
-- Loads radiomics features and labels
-- Applies PCA for dimensionality reduction
-- Trains Logistic Regression, SVM, and Random Forest
-- Outputs model results and predictions
+2. **🧠 Segmentation + Feature Extraction**  
+   - Tools: `MedSAM`, `PyRadiomics`  
+   - CT-only (all patients)  
+   - PET+CT subset (73 patients)
+
+3. **📈 Feature Analysis + Modeling**  
+   - PCA for dimensionality reduction  
+   - p-value feature selection  
+   - ML Models: Logistic Regression, SVM, Random Forest, XGBoost, etc.
 
 ---
 
-## ⚠️ IMPORTANT Notes
-> **⚠️ Update File Paths**  
-> Be sure to modify file paths according to your local data structure in both Python scripts.
+## 🧩 Branch Structure
 
-## 🗃️ Dataset Source
-The data used in this project is from the LUNG-PET-CT-Dx dataset, publicly available on The Cancer Imaging Archive (TCIA).
-
-You can access the dataset here:
-🔗 https://www.cancerimagingarchive.net/collections/lung-pet-ct-dx
-
-### 📌 This dataset is in the public domain but may require account registration and download through the NBIA Data Retriever.
+| Branch | Description |
+|--------|-------------|
+| `data` | Dataset source and folder structure for LUNG-PET-CT-DX |
+| `segmentation_features` | Scripts for segmentation (MedSAM) and radiomic feature extraction (PyRadiomics) |
+| `modeling` | Correlation analysis, p-value computation, and training ML models |
 
 ---
 
-## 🛠 Requirements
-Install dependencies with:
+## 🧰 Tools & Libraries
 
+- Python, PyRadiomics, OpenCV, SimpleITK  
+- MedSAM (segment-anything for medical imaging)  
+- scikit-learn, imblearn (SMOTE), XGBoost  
+- MongoDB Atlas (optional)
+
+---
+
+## ⚙️ How to Run (across branches)
+
+1. Install dependencies:
 pip install -r requirements.txt
 
----
+2. Run segmentation (see Segmentation_and_feature_extraction branch)
 
-## 📁 Output Files
-Segmentation results: segmentation_masks/
+Train models (see Classification_models_and_evaluation branch)
 
-Radiomics features: radiomics_features.csv
+Results are saved as .csv/.xlsx files per model
 
-Model results:
-
-model_predictions.xlsx
-
-model_results_summary.csv
-
----
-
-## 🔮 Future Work
-Here are some optional next steps for anyone continuing this project:
-
-### 1. Organ Segmentation for Full-Body Analysis
-Extend segmentation beyond tumors to include whole-body organs such as:
-Liver
-Kidneys
-Spine
-This enables more holistic analysis and cross-organ correlations using tools like TotalSegmentator or MedSAM.
-
-### 2. Integrate Genomic Data
-Combine imaging features with genomic mutations to support multi-omics models:
-Common mutations: p53, BRCA1/2, MET
-Enables correlation of phenotypic imaging traits with genetic profiles
-
-### 3. Explore Multi-Modal Learning
-Use multiple data types to enhance model robustness:
-Combine PET, CT, metadata, and (optionally) genomic data
-Apply advanced deep learning architectures that handle multiple modalities (e.g., transformers, late-fusion models)
-
-### 4. Working with Foundation Models
-Experiment with foundation models (e.g., MedSAM, Segment Anything) for zero-shot or few-shot segmentation. These models offer generalization capabilities and reduce the need for large annotated datasets.
-
-### 5. Docker-Container for Reproducibility
-Package the entire pipeline—including preprocessing, segmentation, feature extraction, and modeling—into a Docker container to ensure portability and reproducibility across systems.
-
----
-
-## 📬 Contact
-For questions or collaborations, please reach out via the repository’s issues page.
-
-## 📝 License
-This project is licensed under the MIT License — see the LICENSE file for details.
-
-### Dataset Usage Notice
-This project uses imaging data from the LUNG-PET-CT-DX dataset provided by The Cancer Imaging Archive (TCIA).
-
-Please cite the dataset appropriately:
-
-### Clark K, Vendt B, Smith K, et al. (2013)
+### 📚 Citations
+📁 Dataset
+Clark K, Vendt B, Smith K, et al. (2013)
 The Cancer Imaging Archive (TCIA): Maintaining and Operating a Public Information Repository
-Journal of Digital Imaging. 26(6):1045-1057.
+Journal of Digital Imaging. 26(6):1045–1057.
 DOI: 10.1007/s10278-013-9622-7
 
-Use of this dataset is governed by the TCIA Data Usage Policy.
-Be sure to comply with all licensing, citation, and ethical requirements outlined by TCIA.
+### 🧠 MedSAM
+Wang, B., Li, Y., Liu, Y., et al. (2023).
+MedSAM: Segment Anything in Medical Images
+arXiv:2306.00652
+🔗 https://arxiv.org/abs/2306.00652
 
+📬 Contact
+Developed by Keren Dai and Lisa Cohen
+For questions, please open an issue or contact directly.
 
