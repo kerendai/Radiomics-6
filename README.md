@@ -72,7 +72,7 @@ MedSAM: Segment Anything in Medical Images
 arXiv:2306.00652
 🔗 https://arxiv.org/abs/2306.00652
 
-📬 Contact
+### 📬 Contact
 Developed by Keren Dai and Lisa Cohen
 For questions, please open an issue or contact directly.
 
