@@ -66,7 +66,7 @@ The Cancer Imaging Archive (TCIA): Maintaining and Operating a Public Informatio
 Journal of Digital Imaging. 26(6):1045–1057.
 DOI: 10.1007/s10278-013-9622-7
 
-### 🧠 MedSAM
+🧠 MedSAM
 Wang, B., Li, Y., Liu, Y., et al. (2023).
 MedSAM: Segment Anything in Medical Images
 arXiv:2306.00652
