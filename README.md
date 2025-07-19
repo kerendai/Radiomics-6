@@ -50,13 +50,15 @@ Both scripts follow this general pipeline:
 ## ⚙️ How to Run
 
 ### 1. Install dependencies:
-
+``` bash
 pip install -r requirements.txt
+```
 
 ### 2. Add your MongoDB URI
 Create a .env file in the project root with:
-
+```
 MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/
+```
 
 ### 3. Place model weights
 To use the MedSAM model for segmentation, download the pre-trained weights from the official GitHub repository:
@@ -72,11 +74,11 @@ The vit_b version is used in this project.
 ### 4. Run the script
 For CT-only:
 
-python lung_cancer_segmentation_ct.py
+`python lung_cancer_segmentation_ct.py`
 
 For PET+CT subset:
 
-python lung_cancer_segmentation_pet_ct.py
+`python lung_cancer_segmentation_pet_ct.py`
 
 ### 🗂 Output Structure
 For CT-only script (segmentation_masks/):
