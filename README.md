@@ -47,19 +47,20 @@ All models were trained using PCA-reduced features explaining 95% of the varianc
 ## ⚙️ How to Run
 
 ### 1. Install dependencies:
+```
 pip install -r requirements.tx
-
+```
 ### 2. Run correlation analysis:
 
-python correlation_pet_ct.py
+`python correlation_pet_ct.py`
 
 ### 3. Train CT-only models:
 
-python ct_train_models.py
+`python ct_train_models.py`
 
 ### 4. Train PET+CT models and perform evaluation:
 
-python train_models_pet_ct.py
+`python train_models_pet_ct.py`
 
 ## 📊 Output Highlights
 model_predictions_ct.xlsx
