@@ -50,12 +50,9 @@ Predict metastasis status using radiomic features extracted from CT and PET scan
 
 ## ⚙️ How to Run (across branches)
 
-1. Install dependencies:
-pip install -r requirements.txt
-
-2. Run segmentation (in 2.-Segmentation-and-feature-extraction branch)
-
-3. Train models (in 3.-Classification-models-and-evaluation branch)
+1. Download data (instructions are in [`1.-Data`](../../tree/1.-Data))
+2. Run segmentation (in [`2.-Segmentation-and-feature-extraction`](../../tree/2.-Segmentation-and-feature-extraction) branch)
+3. Train models (in  [`3.-Classification-models-and-evaluation`](../../tree/3.-Classification-models-and-evaluation) branch)
 
 ##### Results are saved as .csv/.xlsx files per model
 
