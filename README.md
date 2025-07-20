@@ -69,6 +69,48 @@ MedSAM: Segment Anything in Medical Images
 arXiv:2306.00652
 🔗 https://arxiv.org/abs/2306.00652
 
+---
+
+## 🔮 Future Work
+
+Here are some optional next steps for anyone continuing this project:
+
+### 1. 🧍‍♂️ Organ Segmentation for Full-Body Analysis
+Extend segmentation beyond tumors to include whole-body organs such as:
+- Liver
+- Kidneys
+- Spine  
+This enables more holistic analysis and cross-organ correlations using tools like **TotalSegmentator** or **MedSAM**.
+
+### 2. 🧬 Integrate Genomic Data
+Combine imaging features with genomic mutations to support multi-omics models.  
+Relevant genes may include: **p53**, **BRCA1/2**, **MET**.  
+This enables correlation of phenotypic imaging traits with genetic profiles and supports personalized medicine.
+
+### 3. 🧠 Explore Multi-Modal Learning
+Use multiple data types to enhance model robustness:
+- Combine **PET**, **CT**, **metadata**, and optionally **genomic data**
+- Apply advanced deep learning architectures that support multimodal inputs, such as **transformers** or **late-fusion models**
+
+### 4. 🧪 Work with Foundation Models
+Experiment with foundation models like:
+- **MedSAM**
+- **Segment Anything (SAM)**  
+These models support **zero-shot** or **few-shot** segmentation, reducing the need for large annotated datasets and improving generalization.
+
+### 5. 📦 Docker Container for Reproducibility
+Package the entire pipeline—including:
+- Preprocessing  
+- Segmentation  
+- Feature extraction  
+- Modeling  
+
+into a **Docker container** to ensure full reproducibility and portability across environments and collaborators.
+
+---
+
+Feel free to fork this repository and continue development 🚀
+
 ### 📬 Contact
 Developed by Keren Dai and Lisa Cohen
 For questions, please open an issue or contact directly.
